@@ -1,0 +1,489 @@
+html {
+  height: 100%
+}
+
+body {
+  margin: 0;
+  font-family: Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #c7dfef;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0
+}
+
+body[class=""] {
+  background-color: #0082db;
+  background-image: url(/images/photo-bg.jpg);
+  background-size: cover;
+  background-position: center center
+}
+
+:focus {
+  outline: 0
+}
+
+button {
+  cursor: pointer
+}
+
+button[type=submit] {
+  border-radius: 5px;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 4px 0;
+  background-color: #3eaff9;
+  color: #fff;
+  border: none;
+  padding: 13px 20px
+}
+
+button[type=submit]:hover {
+  background-color: #3ba2e6
+}
+
+button[type=submit].signup {
+  background-color: #f8b20a
+}
+
+button[type=submit].signup:hover {
+  background-color: #e8a503
+}
+
+a {
+  text-decoration: none;
+  color: #0082db
+}
+
+a:hover {
+  text-decoration: underline
+}
+
+.landing-bg {
+  min-height: 100%;
+  background-color: #0082db;
+  background-image: url(/images/photo-bg.jpg);
+  background-size: cover;
+  background-position: center center
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto
+}
+
+main {
+  margin-top: 60px
+}
+
+main>.card {
+  margin-top: 170px
+}
+
+.card {
+  background: #fff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .22);
+  border-radius: 5px;
+  display: block;
+  padding: 20px 25px
+}
+
+.tagline {
+  display: inline-block;
+  margin-top: 185px;
+  color: #fff;
+  letter-spacing: 1.16px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .24)
+}
+
+.tagline h1 {
+  font-weight: 400;
+  font-size: 35px
+}
+
+.tagline h2 {
+  font-weight: 400;
+  font-size: 20px
+}
+
+.action-boxes {
+  width: 352px;
+  float: right;
+  margin-top: 40px
+}
+
+.action-boxes .card {
+  margin: 20px 0
+}
+
+.card {
+  max-width: 400px;
+  margin: 0 auto
+}
+
+.card h1 {
+  font-size: 21px;
+  color: #585e60;
+  letter-spacing: .7px;
+  margin-top: 6px
+}
+
+.card h5 {
+  font-size: 17px;
+  color: #707070;
+  letter-spacing: .56px;
+  font-weight: 500;
+  margin: 15px 0;
+  margin-top: 4px
+}
+
+.card form {
+  position: relative
+}
+
+.card form span.help-block {
+  position: absolute;
+  margin-top: -43px;
+  left: 100%;
+  margin-left: 13px;
+  width: auto;
+  white-space: nowrap;
+  background: rgba(255, 229, 229, .9);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .18);
+  border-radius: 5px;
+  padding: 8px 20px;
+  color: #c35a5a
+}
+
+input {
+  border: 1px solid rgba(0, 0, 0, .23);
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, .13);
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 9px 14px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 4px 0
+}
+
+input:focus {
+  box-shadow: 0 0 2px #0666a2;
+  border: 1px solid rgba(0, 131, 213, .67)
+}
+
+.alert {
+  top: 52px;
+  width: 417px;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  height: 80px;
+  line-height: 80px;
+  background: rgba(255, 229, 229, .84);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .18);
+  border-radius: 5px;
+  color: #c35a5a;
+  padding-top: 10px
+}
+
+.alert:empty {
+  display: none
+}
+
+.alert.alert-info {
+  background: rgba(191, 232, 176, .82);
+  color: #317931
+}
+
+header {
+  background: #fff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .19);
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100
+}
+
+header .logo {
+  background-image: url(/images/logo.svg);
+  width: 80px;
+  height: 21px;
+  margin: 20px;
+  position: absolute
+}
+
+header a {
+  float: right;
+  margin: 20px
+}
+
+header .profile-container {
+  float: right;
+  margin-top: 4px;
+  margin-right: 18px
+}
+
+header .profile-container img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 10px
+}
+
+header .profile-container p {
+  font-size: 16px;
+  color: #7a7a7a;
+  display: inline-block
+}
+
+#app {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 60px;
+  bottom: 0;
+  background-color: #fff
+}
+
+#app .menu {
+  width: 330px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .77);
+  z-index: 3;
+  overflow-y: scroll
+}
+
+#app .menu .header {
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .09);
+  height: 58px;
+  position: relative;
+  z-index: 2
+}
+
+#app .menu .header button.compose {
+  background-image: url(/images/compose-icon.svg);
+  background-color: transparent;
+  border: none;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 20px;
+  top: 20px
+}
+
+#app .menu h3 {
+  font-size: 17px;
+  font-weight: 500;
+  color: #545454;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 58px;
+  margin: 0
+}
+
+#app .menu ul {
+  margin: 0;
+  padding: 0
+}
+
+#app .menu ul li {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, .09);
+  padding: 13px;
+  min-height: 58px;
+  cursor: pointer
+}
+
+#app .menu ul li.active {
+  background-color: rgba(0, 0, 0, .04)
+}
+
+#app .menu ul li .profile-container {
+  display: inline-block;
+  width: calc(100% - 68px);
+  vertical-align: top
+}
+
+#app .menu ul li img {
+  width: 53px;
+  height: 53px;
+  background-color: gray;
+  border-radius: 50%;
+  margin-right: 13px
+}
+
+#app .menu ul li.new .profile-container {
+  margin-top: 10px
+}
+
+#app .menu ul li.new .avatar {
+  width: 53px;
+  height: 53px;
+  background-image: url(/images/empty-avatar.svg);
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 13px
+}
+
+#app .menu ul li .name {
+  display: inline-block;
+  margin: 0;
+  font-size: 16px;
+  color: #545454;
+  font-weight: 500;
+  margin-top: 8px
+}
+
+#app .menu ul li p.message {
+  margin: 0;
+  font-size: 14px;
+  color: #878787;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 3px
+}
+
+#app .menu ul li date {
+  font-size: 14px;
+  color: #3295f4;
+  letter-spacing: 0;
+  float: right
+}
+
+#app .chat {
+  position: absolute;
+  left: 330px;
+  top: 0;
+  right: 0;
+  bottom: 0
+}
+
+#app .chat .destination {
+  position: absolute;
+  left: 1px;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  padding: 7px 15px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .08);
+  background-color: rgba(255, 255, 255, .95)
+}
+
+#app .chat .destination label {
+  color: #676767
+}
+
+#app .chat .destination input {
+  display: inline-block;
+  width: calc(100% - 50px);
+  margin-left: 8px;
+  box-shadow: none;
+  border: none
+}
+
+#app .chat .compose-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, .14);
+  background-color: #fff;
+  padding: 3px 0
+}
+
+#app .chat .compose-box input {
+  border: none;
+  box-shadow: none;
+  max-width: calc(100% - 100px);
+  font-weight: 300
+}
+
+#app .chat .compose-box input:focus {
+  outline: 0;
+  box-shadow: none;
+  border: none
+}
+
+#app .chat .compose-box button {
+  border: none;
+  background: 0 0;
+  font-size: 16px;
+  color: #3295f4;
+  margin: 0 auto;
+  width: 100px
+}
+
+#app .chat .compose-box button:focus {
+  outline: 0
+}
+
+#app .chat ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  position: absolute;
+  top: 0;
+  bottom: 44px;
+  right: 0;
+  left: 0;
+  overflow-y: scroll;
+  padding: 20px
+}
+
+#app .chat ul li {
+  margin: 28px 0
+}
+
+#app .chat ul li p {
+  margin: 0;
+  background-color: #eee;
+  padding: 8px 13px;
+  border-radius: 18px;
+  font-size: 15px;
+  color: #505050;
+  line-height: 21px;
+  max-width: 376px;
+  display: inline-block
+}
+
+#app .chat ul li img {
+  width: 35px;
+  height: 35px;
+  background-color: gray;
+  border-radius: 50%;
+  vertical-align: bottom;
+  margin-right: 13px;
+  position: relative;
+  bottom: -6px
+}
+
+#app .chat ul li.user {
+  text-align: right
+}
+
+#app .chat ul li.user p {
+  text-align: left;
+  background-color: #2a93f7;
+  color: #fff
+}
+
+#app .chat ul li.user img {
+  display: none
+}
