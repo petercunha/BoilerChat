@@ -43,6 +43,9 @@ socket.on('updatechat', function(username, data) {
         </li>
         `)
 	}
+
+	var chatbox = document.getElementById("conversation")
+	chatbox.scrollTop = chatbox.scrollHeight
 })
 
 function switchRoom(room) {
@@ -54,8 +57,20 @@ $(function() {
 	// when the client clicks SEND
 	$('#datasend').click(function() {
 		var message = $('#data').val()
+
+		// Prevent bad input
+		if (message.length == 0) return false
+		if (message.length > 500) {
+			iziToast.warning({
+				title: 'Error',
+				message: 'Your message was too long. The maximum length is 500 characters.',
+				position: 'topCenter',
+				timeout: 1900
+			})
+			return false
+		}
+
 		$('#data').val('')
-		// tell server to execute 'sendchat' and send along one parameter
 		socket.emit('sendchat', message)
 	})
 
@@ -67,6 +82,9 @@ $(function() {
 			$(this).focus()
 		}
 	})
+
+	var chatbox = document.getElementById("conversation")
+	chatbox.scrollTop = chatbox.scrollHeight
 })
 
 function nameGenerator() {
