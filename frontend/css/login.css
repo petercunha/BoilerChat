@@ -1,13 +1,12 @@
-body{
+body {
   background-color: #ffffff;
 }
+
 #loginDiv {
   position: absolute;
-  width: 300px;
-  height: 100px;
-  top: 50%;
-  left: 50%;
-  margin: -100px 0 0 -150px;
+  width: 600px;
+  margin: 0;
+  auto;
 }
 
 fieldset {
@@ -18,12 +17,14 @@ fieldset {
 }
 
 input {
+  margin-right: 25px;
+  margin-left: 25px;
   width: 100%;
   border-radius: 9px;
   height: 22px;
   border-color: #7a7a7a;
   font-family: Helvetica;
-  font-size: 1.5em;
+  font-size: 15px;
 }
 
 p {
@@ -35,13 +36,13 @@ p {
 
 .tt-menu {
   background-color: #c9c5c5;
-  width: 102%;
+  width: 100%;
   border-radius: 9px;
 }
 
-.tt-suggestion{
-  margin-top: 2px;
-  text-align: center;
+.tt-suggestion {
+  margin-top: 3px;
+  margin-bottom: 3px;
   font-family: Helvetica;
-  font-size: 1.5em;
+  font-size: 15px;
 }

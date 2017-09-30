@@ -17,6 +17,10 @@ MongoClient.connect(url, function(err, db) {
 server.listen(PORT)
 console.log('Server started on localhost:8080')
 
+app.get("/chat/:id", (req, res, err) => {
+	res.sendFile(path.join(__dirname, 'frontend', 'index.html'))
+})
+
 app.get("/api/:query", (req, res, err) => {
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err
