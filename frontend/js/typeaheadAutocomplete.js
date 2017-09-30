@@ -16,11 +16,11 @@ var substringMatcher = function(strs) {
       }
     });
 
-    cb(matches);
+    cb(matches);  
   };
 };
 
-var courses = ["CS18000","CS182000"];
+var courses = ["CS18000--Turkstra","CS18000--Dunsmore"];
 
 $('#Courses .typeahead_Course').typeahead({
   hint: true,
