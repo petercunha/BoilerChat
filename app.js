@@ -1,15 +1,16 @@
 var express = require('express')
-  , app = express()
-  , http = require('http')
-  , server = http.createServer(app)
-  , io = require('socket.io').listen(server);
+var app = express()
+var http = require('http')
+var server = http.createServer(app)
+var io = require('socket.io').listen(server)
+var path = require('path')
 
-server.listen(8080);
+const PORT = 8080
+server.listen(PORT)
+console.log('Server started on localhost:8080')
 
 // routing
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
-});
+app.use(express.static(path.join(__dirname, 'frontend')))
 
 // usernames which are currently connected to the chat
 var usernames = {};
@@ -18,7 +19,7 @@ var usernames = {};
 var rooms = ['room1','room2','room3'];
 
 io.sockets.on('connection', function (socket) {
-	
+
 	// when the client emits 'adduser', this listens and executes
 	socket.on('adduser', function(username){
 		// store the username in the socket session for this client
@@ -35,13 +36,13 @@ io.sockets.on('connection', function (socket) {
 		socket.broadcast.to('room1').emit('updatechat', 'SERVER', username + ' has connected to this room');
 		socket.emit('updaterooms', rooms, 'room1');
 	});
-	
+
 	// when the client emits 'sendchat', this listens and executes
 	socket.on('sendchat', function (data) {
 		// we tell the client to execute 'updatechat' with 2 parameters
 		io.sockets.in(socket.room).emit('updatechat', socket.username, data);
 	});
-	
+
 	socket.on('switchRoom', function(newroom){
 		socket.leave(socket.room);
 		socket.join(newroom);
@@ -53,7 +54,7 @@ io.sockets.on('connection', function (socket) {
 		socket.broadcast.to(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
 		socket.emit('updaterooms', rooms, newroom);
 	});
-	
+
 
 	// when the user disconnects.. perform this
 	socket.on('disconnect', function(){
