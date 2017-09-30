@@ -1,0 +1,64 @@
+<!-- lib/messengyr/web/templates/layout/app.html.eex -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>BoilerChat</title>
+    <link rel="stylesheet" href="/css/chatroom.css">
+</head>
+
+<body class=messages>
+    <div class="container">
+        <header>
+
+            <h3 class="logo">BoilerChat</h3>
+
+            <!-- Add this line: -->
+            <a href="/logout">Log out</a>
+            <div class="profile-container">
+                <img src=http://www.gravatar.com/avatar/ced0b8f8052222bb03bcb71a9b4a3cfe />
+                <!-- Add this line! -->
+                <p>John Smith</p>
+            </div>
+
+
+        </header>
+
+        <p class="alert alert-info" role="alert">Logged in as alksdjfh!</p>
+        <p class="alert alert-danger" role="alert"></p>
+
+        <main role="main">
+
+            <div id="app">
+                <div class="menu">
+                    <div class="header">
+                        <h3>Messages</h3><button class="compose"></button></div>
+                    <ul>
+                        <li class="active"><img class="avatar" src="http://www.gravatar.com/avatar/456497a35e38ae8f2e3b60b8f117b653">
+                            <div class="profile-container">
+                                <p class="name">CS 180</p>
+                                <date></date>
+                                <p class="message"></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chat">
+                    <ul></ul>
+                    <div class="compose-box"><input placeholder="Type a message..." value="Hey"><button>Send</button></div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+    <!-- /container -->
+</body>
+
+</html>
