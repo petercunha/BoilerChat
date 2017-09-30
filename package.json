@@ -3,7 +3,7 @@
      "description": "example chat application with socket.io",
      "version": "0.0.1",
      "scripts": {
-	"start": "nodemon app.js"
+          "start": "nodemon app.js"
      },
      "dependencies": {
           "express": "",
