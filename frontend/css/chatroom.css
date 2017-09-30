@@ -173,32 +173,6 @@ input:focus {
   border: 1px solid rgba(0, 131, 213, .67)
 }
 
-.alert {
-  top: 52px;
-  width: 417px;
-  margin: 0 auto;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  height: 80px;
-  line-height: 80px;
-  background: rgba(255, 229, 229, .84);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .18);
-  border-radius: 5px;
-  color: #c35a5a;
-  padding-top: 10px
-}
-
-.alert:empty {
-  display: none
-}
-
-.alert.alert-info {
-  background: rgba(191, 232, 176, .82);
-  color: #317931
-}
-
 header {
   background: #fff;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .19);
@@ -258,7 +232,7 @@ header .profile-container p {
   top: 0;
   bottom: 0;
   left: 0;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .77);
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .09);
   z-index: 3;
   overflow-y: scroll
 }
@@ -303,7 +277,7 @@ header .profile-container p {
   cursor: pointer
 }
 
-#app .menu ul li.active {
+#app .menu ul li.inactive {
   background-color: rgba(0, 0, 0, .04)
 }
 
