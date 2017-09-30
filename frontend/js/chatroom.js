@@ -31,6 +31,8 @@ socket.on('updatechat', function(username, data) {
 	if (user == username) {
 		$('#conversation').append(`
         <li class="user">
+						<label>${username}</label>
+						</br>
             <p>${data}</p>
         </li>
         `)

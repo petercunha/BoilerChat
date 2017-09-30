@@ -211,7 +211,7 @@ header {
 }
 
 header .logo {
-  background-image: url(/images/logo.svg);
+  /*background-image: url(/images/logo.svg);*/
   width: 80px;
   height: 21px;
   margin: 20px;
@@ -253,7 +253,7 @@ header .profile-container p {
 }
 
 #app .menu {
-  width: 330px;
+  width: 300px;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -299,7 +299,7 @@ header .profile-container p {
 #app .menu ul li {
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, .09);
   padding: 13px;
-  min-height: 58px;
+  min-height: 48px;
   cursor: pointer
 }
 
@@ -366,7 +366,7 @@ header .profile-container p {
 
 #app .chat {
   position: absolute;
-  left: 330px;
+  left: 300px;
   top: 0;
   right: 0;
   bottom: 0
