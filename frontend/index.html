@@ -1,5 +1,3 @@
-<!-- lib/messengyr/web/templates/layout/app.html.eex -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,23 +10,19 @@
 
     <title>BoilerChat</title>
     <link rel="stylesheet" href="/css/chatroom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.1.5/css/iziToast.min.css" />
 </head>
 
 <body class=messages>
     <div class="container">
         <header>
-
             <h3 class="logo">BoilerChat</h3>
 
-            <!-- Add this line: -->
             <a href="/logout">Log out</a>
             <div class="profile-container">
                 <img src=http://www.gravatar.com/avatar/ced0b8f8052222bb03bcb71a9b4a3cfe />
-                <!-- Add this line! -->
                 <p id="nametag">John Smith</p>
             </div>
-
-
         </header>
 
         <p class="alert alert-info" role="alert">Logged in as alksdjfh!</p>
@@ -52,79 +46,29 @@
                     </ul>
                 </div>
                 <div class="chat">
-                    <ul id="conversation"></ul>
+                    <ul id="conversation">
+                        <li>
+                            <label>John</label>
+                            </br>
+                            <p>This is a test</p>
+                        </li>
+                        <li class="user">
+                            <p>Hello, this is me speaking</p>
+                        </li>
+                    </ul>
                     <div class="compose-box"><input id="data" placeholder="Type a message..."><button id="datasend">Send</button></div>
                 </div>
             </div>
         </main>
-
     </div>
-    <!-- /container -->
 
+    <!-- Required JS libraries -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        var fullURL = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
-        var socket = io.connect(fullURL)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.1.5/js/iziToast.min.js"></script>
 
-        // on connection to server, ask for user's name with an anonymous callback
-        socket.on('connect', function() {
-            // call the server-side function 'adduser' and send one parameter (value of prompt)
-            var username = prompt("What's your name?")
-            socket.emit('adduser', username)
-            $('#nametag').text(username)
-        })
-
-        // listener, whenever the server emits 'updatechat', this updates the chat body
-        socket.on('updatechat', function(username, data) {
-            $('#conversation').append('<b>' + username + ':</b> ' + data + '<br>')
-        })
-
-        // listener, whenever the server emits 'updaterooms', this updates the room the client is in
-        // socket.on('updaterooms', function(rooms, current_room) {
-        //     $('#rooms').empty()
-        //     $.each(rooms, function(key, value) {
-        //         if (value == current_room) {
-        //             $('#rooms').append('<div>' + value + '</div>')
-        //         } else {
-        //             $('#rooms').append('<div><a href="#" onclick="switchRoom(\'' + value + '\')">' + value + '</a></div>')
-        //             $('#chatrooms').append(`<li><img class="avatar" src="http://www.gravatar.com/avatar/456497a35e38ae8f2e3b60b8f117b653">
-        //                 <div class="profile-container">
-        //                     <p class="name">CS 180</p>
-        //                     <date></date>
-        //                     <p class="message"></p>
-        //                 </div>
-        //             </li>`)
-        //         }
-        //     })
-        //})
-
-        function switchRoom(room) {
-            socket.emit('switchRoom', room)
-        }
-
-        // on load of page
-        $(function() {
-            // when the client clicks SEND
-            $('#datasend').click(function() {
-                var message = $('#data').val()
-                $('#data').val('')
-                // tell server to execute 'sendchat' and send along one parameter
-                socket.emit('sendchat', message)
-            })
-
-            // when the client hits ENTER on their keyboard
-            $('#data').keypress(function(e) {
-                if (e.which == 13) {
-                    $(this).blur()
-                    $('#datasend').focus().click()
-                    $(this).focus()
-                }
-            })
-
-            $('#data').focus()
-        })
-    </script>
+    <!-- Custom JS -->
+    <script type="text/javascript" src="/js/chatroom.js"></script>
 </body>
 
 </html>
