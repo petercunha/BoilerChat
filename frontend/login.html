@@ -56,14 +56,12 @@
             $('#tablediv').hide()
 
             // Handle enter button click
-            $('#search').keypress(function(e) {
-                if (e.which == 13) {
+            $('#search').keyup(function(e) {
                     $('#tablediv').show()
                     var input = $('#search').val()
                     if (input.includes(' ') && input.split(' ').length == 2) {
                         input = input.split(' ')
                         if (input[0].length > 0 && input[1].length > 0) {
-                            $('#course_list').empty()
                             populateTable(input[0], input[1])
                         }
                     } else {
@@ -74,7 +72,6 @@
                         $('#course_list').empty()
                         $('#course_list').append(course_data)
                     }
-                }
             })
 
             // Populate table with API response
@@ -119,6 +116,8 @@
                         course_data += '<td><a href="/chat/' + url + '" type="button" class="btn btn-primary btn-sm">Join Chat</></td>'
                         course_data += '</tr>'
                     }
+                    // Clear table
+                    $('#course_list').empty()
 
                     // Flush table buffer to HTML table
                     $('#course_list').append(course_data)
