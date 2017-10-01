@@ -7,64 +7,72 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/login.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-    </script>
-    <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
-
-
-
 </head>
 
 <body>
-    <div class="" id="loginDiv">
-        <fieldset>
-            <p>Please enter the course</p>
-            <div id="Courses">
-                <input id="inputbox" type="text" placeholder="CS 180" class="typeahead_Course">
-            </div>
-        </fieldset>
-    </div>
-</body>
-    <div class="container">
-      <div class="table-responsive">
-        <h1>Pick a ChatRoom</h1>
-        <br />
-        <table class="table table-inverse" id="course_List">
-          <thead>
-            <tr>
-              <th>Course Subject</th>
-               <th>Course Name</th>
-               <th>Instructors</th>
-           </tr>
-          </thead>
-         </table>
-      </div>
-    </div>
-  </body>
-<footer>
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/typeahead.js"></script>
-    <script type="text/javascript" src="./js/typeaheadAutocomplete.js"></script>
+    <p>Please enter the course</p>
+    <input id="inputbox" type="text" placeholder="CS 180">
 
-</footer>
+    <div class="container">
+        <div class="table-responsive">
+            <h1>Pick a ChatRoom</h1>
+            <br />
+            <table class="table table-inverse">
+                <thead>
+                    <tr>
+                        <th>Course Subject</th>
+                        <th>Course Name</th>
+                        <th>Instructors</th>
+                        <th>Join Chat</th>
+                    </tr>
+                </thead>
+                <tbody id="course_list">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('#inputbox').keypress(function(e) {
+                if (e.which == 13) {
+                    var input = $('#inputbox').val().split(' ')
+                    populateTable(input[0], input[1])
+                }
+            })
+
+            function populateTable(course, id) {
+                $('#course_list').empty()
+                $.get(`/api/${course}/${id}`, function(data, status) {
+                    for (var i = 0; i < data.length; i++) {
+                        var json = data[i]
+                        var course_data = ""
+
+                        let classID = json.Abbreviation + " " + json.Courses.Number
+                        let className = json.Courses.Title
+                        let classInstructor = json.Courses.Classes.Sections.Meetings[0].Instructors[0].Name
+                        let url = btoa(classID + ':' + className + ':' + classInstructor)
+
+                        course_data += '<tr>'
+                        course_data += '<td>' + classID + '</td>'
+                        course_data += '<td>' + className + '</td>'
+                        course_data += '<td>' + classInstructor + '</td>'
+                        course_data += '<td><a href="/chat/' + url + '">Join</></td>'
+                        course_data += '</tr>'
+
+                        console.log(course_data);
+
+                        $('#course_list').append(course_data)
+                    }
+                })
+            }
+        })
+    </script>
+
+</body>
 
 </html>
-
-<script>
- $(document).ready(function(){
-  $.getJSON("yourFile.json", function(data){
-    var course_data = "";
-    $.each(data, function(key, value){
-      course_data += '<tr>';
-      course_data += '<td>' +value.Subject+'</td>';
-      course_data += '<td>' +value.Number+'</td>';
-      course_data += '<td>' +value.Instructor+'</td>';
-      course_data += '</tr>';
-    });
-    $('#course_list').append(course_data);
-  });
- }); 
-</script>
