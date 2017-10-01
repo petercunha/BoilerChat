@@ -438,7 +438,8 @@ header .profile-container p {
 }
 
 #app .chat ul li label {
-  margin-left: 12px;
+  margin-left: 5px;
+  margin-bottom: 5px;
   font-size: 12px;
   color: #C0C0C0;
   max-width: 376px;
@@ -466,6 +467,12 @@ header .profile-container p {
   bottom: -6px
 }
 
+#nametag {
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #app .chat ul li.user {
   text-align: right
 }
@@ -480,19 +487,19 @@ header .profile-container p {
   display: none
 }
 
+
 /* Phones */
-@media only screen and (max-width: 770px) {
+
+@media only screen and (max-width: 100000000px) {
   @media only screen and (max-width: 480px) {
     header #nametag {
       display: none;
     }
   }
-
   #app .menu {
     width: 0px;
     display: none;
   }
-
   #app .chat {
     position: absolute;
     left: 0;

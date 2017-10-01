@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>BoilerMegle</title>
+    <title>BoilerChat</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -13,16 +13,24 @@
 </head>
 
 <body>
-    <div class="box">
-        <div class="container-4">
-            <input type="search" id="search" placeholder="Search..." />
-            <button class="icon"><i class="fa fa-search"></i></button>
-        </div>
-    </div>
 
     <div class="container">
+
+        <div class="row logo">
+            <div class="col-md-12">
+                <h1 class="text-center">BoilerChat</h1>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="container-4">
+                <input autofocus type="search" id="search" placeholder="Search..." />
+                <button class="icon"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+
         <div class="table-responsive">
-            <table class="table table-inverse">
+            <table id="tablediv" class="table table-inverse" style="display: none; background-color: #2b303b">
                 <thead>
                     <tr>
                         <th>Course Subject</th>
@@ -32,7 +40,9 @@
                     </tr>
                 </thead>
                 <tbody id="course_list">
-
+                    <tr>
+                        <td>Type in a course ID to join a chat.</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -42,33 +52,45 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
-
-            // Map to keep track of and prevent adding duplicate objects to the table
-            var map = {};
+            // Hide table before searching
+            $('#tablediv').hide()
 
             // Handle enter button click
             $('#search').keypress(function(e) {
                 if (e.which == 13) {
-                    var input = $('#search').val().split(' ')
-                    populateTable(input[0], input[1])
+                    $('#tablediv').show()
+                    var input = $('#search').val()
+                    if (input.includes(' ') && input.split(' ').length == 2) {
+                        input = input.split(' ')
+                        if (input[0].length > 0 && input[1].length > 0) {
+                            $('#course_list').empty()
+                            populateTable(input[0], input[1])
+                        }
+                    } else {
+                        var course_data = ""
+                        course_data += '<tr>'
+                        course_data += '<td>No class with by that ID. Try again with the format "<b>CS 180</b>".</td>'
+                        course_data += '</tr>'
+                        $('#course_list').empty()
+                        $('#course_list').append(course_data)
+                    }
                 }
             })
 
             // Populate table with API response
             function populateTable(course, id) {
-                $('#course_list').empty()
+                // Map to keep track of and prevent adding duplicate objects to the table
+                var map = {}
+
                 $.get(`/api/${course}/${id}`, function(data, status) {
 
                     // Table buffer
                     var course_data = ""
 
                     if (data.length == 0) {
-                      course_data += '<tr>'
-                      course_data += '<td>No class with by that ID. Try again with the format "<b>CS 180</b>".</td>'
-                      course_data += '<td></td>'
-                      course_data += '<td></td>'
-                      course_data += '<td></td>'
-                      course_data += '</tr>'
+                        course_data += '<tr>'
+                        course_data += '<td>No class with by that ID. Try again with the format "<b>CS 180</b>".</td>'
+                        course_data += '</tr>'
                     }
 
                     for (var i = 0; i < data.length; i++) {
@@ -94,7 +116,7 @@
                         course_data += '<td>' + classID + '</td>'
                         course_data += '<td>' + className + '</td>'
                         course_data += '<td>' + classInstructor + '</td>'
-                        course_data += '<td><a href="/chat/' + url + '">Join</></td>'
+                        course_data += '<td><a href="/chat/' + url + '" type="button" class="btn btn-primary btn-sm">Join Chat</></td>'
                         course_data += '</tr>'
                     }
 

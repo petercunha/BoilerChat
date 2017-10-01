@@ -21,7 +21,7 @@ function start() {
 		// user = prompt("What's your name?")
 		user = nameGenerator()
 		socket.emit('adduser', user, resultEncoded)
-		$('#nametag').text(user)
+		$('#nametag').text(result.split(':')[0] + ' · ' + result.split(':')[2])
 	})
 
 	// listener, whenever the server emits 'updatechat', this updates the chat body
