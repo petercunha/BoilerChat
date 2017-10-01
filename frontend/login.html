@@ -7,28 +7,21 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  <!--favicons-->
-  <link rel="stylesheet" href="css/login.css"/>
-  <link href="https://static.tutsplus.com/assets/favicon-3ef7b4f54ed4378b31ff3124d3c4bff8.png" rel="shortcut icon" type="image/png" />
-  <link href="https://static.tutsplus.com/assets/apple-touch-icon-3ef7b4f54ed4378b31ff3124d3c4bff8.png" rel="apple-touch-icon" type="image/png" />
 
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <p>Please enter the course</p>
-    <input id="inputbox" type="text" placeholder="CS 180">
     <div class="box">
-      <div class="container-1">
-        <span class="icon"><i class="fa fa-search"></i></span>
-        <input type="search" id="search" placeholder="Search for Course..." />
-      </div>
+        <div class="container-4">
+            <input type="search" id="search" placeholder="Search..." />
+            <button class="icon"><i class="fa fa-search"></i></button>
+        </div>
     </div>
-
 
     <div class="container">
         <div class="table-responsive">
-            <h1>Pick a ChatRoom</h1>
-            <br />
             <table class="table table-inverse">
                 <thead>
                     <tr>
@@ -54,9 +47,9 @@
             var map = {};
 
             // Handle enter button click
-            $('#inputbox').keypress(function(e) {
+            $('#search').keypress(function(e) {
                 if (e.which == 13) {
-                    var input = $('#inputbox').val().split(' ')
+                    var input = $('#search').val().split(' ')
                     populateTable(input[0], input[1])
                 }
             })
@@ -68,6 +61,15 @@
 
                     // Table buffer
                     var course_data = ""
+
+                    if (data.length == 0) {
+                      course_data += '<tr>'
+                      course_data += '<td>No class with by that ID. Try again with the format "<b>CS 180</b>".</td>'
+                      course_data += '<td></td>'
+                      course_data += '<td></td>'
+                      course_data += '<td></td>'
+                      course_data += '</tr>'
+                    }
 
                     for (var i = 0; i < data.length; i++) {
                         var json = data[i]
@@ -82,7 +84,7 @@
 
                         // Don't add duplicates to the table
                         if (url in map) {
-                          continue
+                            continue
                         }
                         // Track the object hash to prevent duplicates
                         map[url] = 1;
@@ -102,30 +104,6 @@
             }
         })
     </script>
-
-
-
-<div class="box">
-  <div class="container-2">
-      <span class="icon"><i class="fa fa-search"></i></span>
-      <input type="search" id="search" placeholder="CS 180" />
-  </div>
-</div>
-
-<div class="box">
-  <div class="container-3">
-      <span class="icon"><i class="fa fa-search"></i></span>
-      <input type="search" id="search" placeholder="Search..." />
-  </div>
-</div>
-
-<div class="box">
-  <div class="container-4">
-      <input type="search" id="search" placeholder="Search..." />
-      <button class="icon"><i class="fa fa-search"></i></button>
-  </div>
-</div>
-
 </body>
 
 </html>
