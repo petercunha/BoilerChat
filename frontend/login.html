@@ -5,9 +5,16 @@
     <meta charset="utf-8">
     <title>BoilerMegle</title>
 
-
-
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/login.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    </script>
+    <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+
+
 
 </head>
 
@@ -20,7 +27,27 @@
             </div>
         </fieldset>
     </div>
+<<<<<<< c46b6610bd1c4ba600eb32596dd18d4edec87140
 </body>
+=======
+
+    <div class="container">
+      <div class="table-responsive">
+        <h1>Pick a ChatRoom</h1>
+        <br />
+        <table class="table table-inverse" id="course_List">
+          <thead>
+            <tr>
+              <th>Course Subject</th>
+               <th>Course Name</th>
+               <th>Instructors</th>
+           </tr>
+          </thead>
+         </table>
+      </div>
+    </div>
+  </body>
+>>>>>>> added table to dynamically add JSON
 
 <footer>
     <!-- jQuery library -->
@@ -31,3 +58,19 @@
 </footer>
 
 </html>
+
+<script>
+ $(document).ready(function(){
+  $.getJSON("yourFile.json", function(data){
+    var course_data = "";
+    $.each(data, function(key, value){
+      course_data += '<tr>';
+      course_data += '<td>' +value.Subject+'</td>';
+      course_data += '<td>' +value.Number+'</td>';
+      course_data += '<td>' +value.Instructor+'</td>';
+      course_data += '</tr>';
+    });
+    $('#course_list').append(course_data);
+  });
+ }); 
+</script>

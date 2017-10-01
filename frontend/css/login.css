@@ -1,5 +1,12 @@
-body {
-  background-color: #ffffff;
+body{
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif
+  background: #212121
+  color: #fff
+
+  background: linear-gradient(rgba(#F9774C, .75), rgba(#802A0C, .85)), url("https://farm3.staticflickr.com/2862/10936924134_24ce77ae37_b.jpg")
+  min-height: 100%
+  background-size: cover
+  background-position: 50% 0
 }
 
 #loginDiv {
@@ -46,3 +53,10 @@ p {
   font-family: Helvetica;
   font-size: 15px;
 }
+
+h1 {
+  text-align: center;
+  margin-top: 500px
+}
+
+
