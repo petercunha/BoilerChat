@@ -63,13 +63,6 @@ app.get('/api/:type/:number', (req, res, err) => {
 
 		db.collection('classes').aggregate(aggregation).limit(100).toArray(function(err, result) {
 			if (err) throw err
-			// var arr = result[0].Courses
-			// for (var i = 0; i < arr.length; i++) {
-			// 	if(number_reg.test(arr[i].Number)) {
-			// 		res.send(arr[i])
-			// 		return
-			// 	}
-			// }
 			res.send(result)
 			db.close()
 		})

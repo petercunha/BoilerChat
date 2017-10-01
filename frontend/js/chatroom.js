@@ -10,7 +10,8 @@ function start() {
 	var uri = document.location.pathname
 	var lastslashindex = uri.lastIndexOf('/')
 	var result = uri.substring(lastslashindex + 1)
-	$('#lecturename').text(atob(result))
+	$('#lecturename').text(atob(result).split(':')[0])
+	$('#lectureprofessor').text(atob(result).split(':')[2])
 
 	// on connection to server, ask for user's name with an anonymous callback
 	socket.on('connect', function() {
