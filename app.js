@@ -5,7 +5,7 @@ var server = http.createServer(app)
 var io = require('socket.io').listen(server)
 var path = require('path')
 var MongoClient = require('mongodb').MongoClient
-var url = "mongodb://localhost:27017/boilerchat"
+var url = 'mongodb://localhost:27017/boilerchat'
 const PORT = 8080
 
 // Connect to MongoDB
@@ -17,42 +17,60 @@ MongoClient.connect(url, function(err, db) {
 server.listen(PORT)
 console.log('Server started on localhost:8080')
 
-app.get("/chat/:id", (req, res, err) => {
+app.get('/chat/:id', (req, res, err) => {
 	res.sendFile(path.join(__dirname, 'frontend', 'index.html'))
 })
 
-app.get("/api/:query", (req, res, err) => {
+app.get('/api/:type/:number', (req, res, err) => {
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err
 
-		var number_reg = new RegExp('^' + req.params.query)
-    var title_reg = new RegExp(req.params.query)
+		var course_reg = new RegExp('^' + req.params.type)
+		var number_reg = new RegExp('^' + req.params.number)
 
-		var query = {
-      $or: [
-  			{
-          "Number": {
-    				$regex: number_reg,
-    				$options: "mi"
-    			}
-        },
-        {
-          "Title": {
-    				$regex: title_reg,
-    				$options: "i"
-    			}
-        },
-      ]
-		}
+		var aggregation = [
+			{
+				$match: {
+					'Abbreviation': {
+						$regex: course_reg,
+						$options: "mi"
+					}
+				}
+			},
+			{
+				$unwind: "$Courses"
+			},
+			{
+				$unwind: "$Courses.Classes"
+			},
+			{
+				$match: {
+					'Courses.Number': {
+						$regex: number_reg,
+						$options: "mi"
+					}
+				}
+			},
+			{
+				$unwind: "$Courses.Classes.Sections"
+			},
+			{
+				$match: {
+					'Courses.Classes.Sections.Type': 'Lecture'
+				}
+			}
+		]
 
-		db.collection("courses").find(query).limit(8).toArray(function(err, result) {
+		db.collection('classes').aggregate(aggregation).limit(100).toArray(function(err, result) {
 			if (err) throw err
-      var final = []
-      for (var i = 0; i < result.length; i++) {
-        var curr = result[i]
-        final[i] = `${curr.Title} (${curr.Number})`
-      }
-			res.send(final)
+			// var arr = result[0].Courses
+			// for (var i = 0; i < arr.length; i++) {
+			// 	if(number_reg.test(arr[i].Number)) {
+			// 		res.send(arr[i])
+			// 		return
+			// 	}
+			// }
+			res.send(result)
 			db.close()
 		})
 	})
