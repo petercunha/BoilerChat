@@ -22,29 +22,35 @@
             </div>
         </div>
 
-        <div class="box">
-            <div class="container-4">
-                <input autofocus type="search" id="search" placeholder="Search..." />
-                <button class="icon"><i class="fa fa-search"></i></button>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container-4">
+                    <input id="search" type="search" class="form-control" placeholder="Search..." aria-describedby="a1">
+                    <button class="icon"><i class="fa fa-search"></i></button>
+                </div>
             </div>
         </div>
 
-        <div class="table-responsive">
-            <table id="tablediv" class="table table-inverse" style="display: none; background-color: #2b303b">
-                <thead>
-                    <tr>
-                        <th>Course Subject</th>
-                        <th>Course Name</th>
-                        <th>Instructors</th>
-                        <th>Join Chat</th>
-                    </tr>
-                </thead>
-                <tbody id="course_list">
-                    <tr>
-                        <td>Type in a course ID to join a chat.</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table text-center">
+                    <table id="tablediv" class="table table-inverse text-center" style="display: none; background-color: #2b303b">
+                        <thead class="text-center">
+                            <tr class="text-center">
+                                <th>Course Subject</th>
+                                <th>Course Name</th>
+                                <th>Instructors</th>
+                                <th>Join Chat</th>
+                            </tr>
+                        </thead>
+                        <tbody id="course_list">
+                            <tr>
+                                <td>Type in a course ID to join a chat.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -52,26 +58,31 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Hide table before searching
-            $('#tablediv').hide()
 
             // Handle enter button click
             $('#search').keyup(function(e) {
-                    $('#tablediv').show()
-                    var input = $('#search').val()
-                    if (input.includes(' ') && input.split(' ').length == 2) {
-                        input = input.split(' ')
-                        if (input[0].length > 0 && input[1].length > 0) {
-                            populateTable(input[0], input[1])
-                        }
-                    } else {
-                        var course_data = ""
-                        course_data += '<tr>'
-                        course_data += '<td>No class with by that ID. Try again with the format "<b>CS 180</b>".</td>'
-                        course_data += '</tr>'
-                        $('#course_list').empty()
-                        $('#course_list').append(course_data)
+                var input = $('#search').val()
+
+                // Animate when input is first entered
+                if (input == '') {
+                    $('#tablediv').hide('slow')
+                } else {
+                    $('#tablediv').show('slow')
+                }
+
+                if (input.includes(' ') && input.split(' ').length == 2) {
+                    input = input.split(' ')
+                    if (input[0].length > 0 && input[1].length > 0) {
+                        populateTable(input[0], input[1])
                     }
+                } else {
+                    var course_data = ""
+                    course_data += '<tr>'
+                    course_data += '<td>No class with by that ID. Try again with the format "<b>CS 180</b>".</td>'
+                    course_data += '</tr>'
+                    $('#course_list').empty()
+                    $('#course_list').append(course_data)
+                }
             })
 
             // Populate table with API response
@@ -116,11 +127,10 @@
                         course_data += '<td><a href="/chat/' + url + '" type="button" class="btn btn-primary btn-sm">Join Chat</></td>'
                         course_data += '</tr>'
                     }
-                    // Clear table
-                    $('#course_list').empty()
 
-                    // Flush table buffer to HTML table
+                    $('#course_list').empty()
                     $('#course_list').append(course_data)
+
                 })
             }
         })
