@@ -4,6 +4,7 @@ var http = require('http')
 var server = http.createServer(app)
 var io = require('socket.io').listen(server)
 var path = require('path')
+var validator = require('validator')
 var MongoClient = require('mongodb').MongoClient
 var url = 'mongodb://localhost:27017/boilerchat'
 const PORT = 8080
@@ -83,6 +84,11 @@ io.sockets.on('connection', function(socket) {
 
 	// when the client emits 'adduser', this listens and executes
 	socket.on('adduser', function(username, room) {
+
+		// Sanitize input
+		username = validator.escape(username)
+		room = validator.escape(room)
+
 		// store the username in the socket session for this client
 		socket.username = username;
 		// store the room name in the socket session for this client
@@ -99,11 +105,19 @@ io.sockets.on('connection', function(socket) {
 
 	// when the client emits 'sendchat', this listens and executes
 	socket.on('sendchat', function(data) {
+
+		// Sanitize input
+		data = validator.escape(data)
+
 		// we tell the client to execute 'updatechat' with 2 parameters
 		io.sockets.in(socket.room).emit('updatechat', socket.username, data);
 	});
 
 	socket.on('switchRoom', function(newroom) {
+
+		// Sanitize input
+		newroom = validator.escape(newroom)
+
 		socket.leave(socket.room);
 		socket.join(newroom);
 		socket.emit('updatechat', 'SERVER-MSG', 'You have connected to ' + newroom);

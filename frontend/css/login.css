@@ -10,7 +10,7 @@ body {
 }
 
 .logo {
-  margin-top: 7%;
+  margin-top: 9%;
   transition: color 1s ease;
   color: white;
   animation: logotransition 5s;
@@ -69,7 +69,7 @@ body {
 }
 
 table {
-  margin-top: 5%;
+  margin-top: 4%;
 }
 
 .container-4 {

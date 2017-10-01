@@ -10,6 +10,7 @@
           "mongodb": "^2.2.31",
           "nodemon": "^1.12.1",
           "path": "^0.12.7",
-          "socket.io": ""
+          "socket.io": "",
+          "validator": "^9.0.0"
      }
 }
