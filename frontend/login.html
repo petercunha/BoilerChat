@@ -38,6 +38,10 @@
     <script>
         $(document).ready(function() {
 
+            // Map to keep track of and prevent adding duplicate objects to the table
+            var map = {};
+
+            // Handle enter button click
             $('#inputbox').keypress(function(e) {
                 if (e.which == 13) {
                     var input = $('#inputbox').val().split(' ')
@@ -45,29 +49,43 @@
                 }
             })
 
+            // Populate table with API response
             function populateTable(course, id) {
                 $('#course_list').empty()
                 $.get(`/api/${course}/${id}`, function(data, status) {
+
+                    // Table buffer
+                    var course_data = ""
+
                     for (var i = 0; i < data.length; i++) {
                         var json = data[i]
-                        var course_data = ""
 
+                        // Grab relevant data from API response
                         let classID = json.Abbreviation + " " + json.Courses.Number
                         let className = json.Courses.Title
                         let classInstructor = json.Courses.Classes.Sections.Meetings[0].Instructors[0].Name
+
+                        // Base64 encode relevant data
                         let url = btoa(classID + ':' + className + ':' + classInstructor)
 
+                        // Don't add duplicates to the table
+                        if (url in map) {
+                          continue
+                        }
+                        // Track the object hash to prevent duplicates
+                        map[url] = 1;
+
+                        // Add table data to buffer
                         course_data += '<tr>'
                         course_data += '<td>' + classID + '</td>'
                         course_data += '<td>' + className + '</td>'
                         course_data += '<td>' + classInstructor + '</td>'
                         course_data += '<td><a href="/chat/' + url + '">Join</></td>'
                         course_data += '</tr>'
-
-                        console.log(course_data);
-
-                        $('#course_list').append(course_data)
                     }
+
+                    // Flush table buffer to HTML table
+                    $('#course_list').append(course_data)
                 })
             }
         })

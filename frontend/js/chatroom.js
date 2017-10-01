@@ -9,16 +9,18 @@ function start() {
 
 	var uri = document.location.pathname
 	var lastslashindex = uri.lastIndexOf('/')
-	var result = uri.substring(lastslashindex + 1)
-	$('#lecturename').text(atob(result).split(':')[0])
-	$('#lectureprofessor').text(atob(result).split(':')[2])
+	var resultEncoded = uri.substring(lastslashindex + 1)
+	var result = atob(resultEncoded)
+
+	$('#lecturename').text(result.split(':')[0])
+	$('#lectureprofessor').text(result.split(':')[2])
 
 	// on connection to server, ask for user's name with an anonymous callback
 	socket.on('connect', function() {
 		// call the server-side function 'adduser' and send one parameter (value of prompt)
 		// user = prompt("What's your name?")
 		user = nameGenerator()
-		socket.emit('adduser', user)
+		socket.emit('adduser', user, resultEncoded)
 		$('#nametag').text(user)
 	})
 

@@ -17,6 +17,10 @@ MongoClient.connect(url, function(err, db) {
 server.listen(PORT)
 console.log('Server started on localhost:8080')
 
+app.get('/', (req, res, err) => {
+	res.sendFile(path.join(__dirname, 'frontend', 'login.html'))
+})
+
 app.get('/chat/:id', (req, res, err) => {
 	res.sendFile(path.join(__dirname, 'frontend', 'index.html'))
 })
@@ -75,26 +79,22 @@ app.use(express.static(path.join(__dirname, 'frontend')))
 // usernames which are currently connected to the chat
 var usernames = {};
 
-// rooms which are currently available in chat
-var rooms = ['CS 180', 'CS 240', 'CS 361'];
-
 io.sockets.on('connection', function(socket) {
 
 	// when the client emits 'adduser', this listens and executes
-	socket.on('adduser', function(username) {
+	socket.on('adduser', function(username, room) {
 		// store the username in the socket session for this client
 		socket.username = username;
 		// store the room name in the socket session for this client
-		socket.room = 'CS 180';
+		socket.room = room;
 		// add the client's username to the global list
 		usernames[username] = username;
 		// send client to room 1
-		socket.join('CS 180');
+		socket.join(room);
 		// echo to client they've connected
-		socket.emit('updatechat', 'SERVER-MSG', 'You have connected to ' + socket.room);
+		socket.emit('updatechat', 'SERVER-MSG', 'You have connected to ' + atob(room).split(':')[0]);
 		// echo to room 1 that a person has connected to their room
-		socket.broadcast.to('room1').emit('updatechat', 'SERVER-MSG', username + ' has connected to this room');
-		socket.emit('updaterooms', rooms, 'room1');
+		socket.broadcast.to(room).emit('updatechat', 'SERVER-MSG', username + ' has connected to this room');
 	});
 
 	// when the client emits 'sendchat', this listens and executes
@@ -123,7 +123,15 @@ io.sockets.on('connection', function(socket) {
 		// update list of users in chat, client-side
 		io.sockets.emit('updateusers', usernames);
 		// echo globally that this client has left
-		socket.broadcast.emit('updatechat', 'SERVER-MSG', socket.username + ' has disconnected');
+		socket.broadcast.to(socket.room).emit('updatechat', 'SERVER-MSG', socket.username + ' has disconnected');
 		socket.leave(socket.room);
 	});
 });
+
+function atob(str) {
+	return new Buffer(str, 'base64').toString('ascii')
+}
+
+function btoa(str) {
+	return new Buffer(str).toString('base64')
+}
