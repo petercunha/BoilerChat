@@ -7,7 +7,7 @@ var path = require('path')
 var validator = require('validator')
 var MongoClient = require('mongodb').MongoClient
 var url = 'mongodb://localhost:27017/boilerchat'
-const PORT = 8080
+const PORT = 80
 
 // Connect to MongoDB
 MongoClient.connect(url, function(err, db) {
