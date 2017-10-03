@@ -87,7 +87,7 @@ app.get('/api/:type/:number', (req, res, err) => {
 			}
 		]
 
-		db.collection('classes').aggregate(aggregation).limit(100).toArray(function(err, result) {
+		db.collection('classes').aggregate(aggregation).limit(250).toArray(function(err, result) {
 			if (err) throw err
 			res.send(result)
 			db.close()
