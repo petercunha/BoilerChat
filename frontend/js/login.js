@@ -45,6 +45,15 @@ $(document).ready(function() {
             for (var i = 0; i < data.length; i++) {
                 var json = data[i]
 
+                // Validate the JSON object. Sometimes we have issues with corrupted data.
+                {
+                  let temp = json.Courses.Classes.Sections
+                  if (temp.Meetings.length == 0) continue
+                  if (temp.Meetings[0].Instructors.length == 0) continue
+                  if (!temp.Meetings[0].Instructors[0].Name) continue
+                  if (!json.Abbreviation || !json.Courses) continue
+                }
+
                 // Grab relevant data from API response
                 let classID = json.Abbreviation + " " + json.Courses.Number
                 let className = json.Courses.Title
