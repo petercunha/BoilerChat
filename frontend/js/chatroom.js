@@ -5,6 +5,7 @@ $(document).ready(function() {
 function start() {
 	var fullURL = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '')
 	var socket = io.connect(fullURL)
+	var lastMessageUsername = ''
 	var user
 
 	var uri = document.location.pathname
@@ -40,24 +41,31 @@ function start() {
 			return
 		}
 
+		// If the last message was from the same user, don't prepend their username
+		var label = ''
+		if (lastMessageUsername != username) {
+			label = `<label>${username}</label></br>`
+		}
+		lastMessageUsername = username
+
 		// Append message to conversation
 		if (user == username) {
 			$('#conversation').append(`
 	        <li class="user">
-							<label>${username}</label>
-							</br>
+							${label}
 	            <p>${data}</p>
 	        </li>
 	        `)
 		} else {
 			$('#conversation').append(`
 	        <li>
-	            <label>${username}</label>
-	            </br>
+	            ${label}
 	            <p>${data}</p>
 	        </li>
 	        `)
 		}
+
+
 
 		var chatbox = document.getElementById("conversation")
 		chatbox.scrollTop = chatbox.scrollHeight
@@ -103,8 +111,8 @@ function start() {
 	})
 
 	$('input, select, textarea').on('focus blur', function(event) {
-    $('meta[name=viewport]').attr('content', 'width=device-width,initial-scale=1,maximum-scale=' + (event.type == 'blur' ? 10 : 1));
-  });
+		$('meta[name=viewport]').attr('content', 'width=device-width,initial-scale=1,maximum-scale=' + (event.type == 'blur' ? 10 : 1));
+	});
 
 	function nameGenerator() {
 		var animals = ["Alligator", "Purdue Pete", "Anteater", "Armadillo", "Badger", "Bat", "Beaver", "Buffalo", "Camel", "Chameleon", "Cheetah", "Chipmunk", "Chinchilla", "Chupacabra", "Dingus", "Coyote", "Crow", "Dingo", "Dinosaur", "Dolphin", "Duck", "Elephant", "Ferret", "Fox", "Frog", "Giraffe", "Gopher", "Grizzly", "Hedgehog", "Hippo", "Hyena", "Jackal", "Ibex", "Iguana", "Koala", "Kraken", "Lemur", "Leopard", "Liger", "Llama", "Manatee", "Mink", "Monkey", "Narwhal", "Orangutan", "Otter", "Panda", "Penguin", "Peter", "Platypus", "Python", "Pumpkin", "Sea Cucumber", "Rabbit", "Raccoon", "Rhino", "Sheep", "Shrew", "Skunk", "Squirrel", "Turtle", "Walrus", "Wolf", "Wolverine", "Wombat", "Tuna"]
