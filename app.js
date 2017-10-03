@@ -75,6 +75,15 @@ app.get('/api/:type/:number', (req, res, err) => {
 				$match: {
 					'Courses.Classes.Sections.Type': 'Lecture'
 				}
+			},
+			{
+				$project: {
+					'_id': 0,
+					'Abbreviation': 1,
+					'Courses.Title': 1,
+					'Courses.Number': 1,
+					'Courses.Classes.Sections.Meetings.Instructors.Name': 1
+				}
 			}
 		]
 
