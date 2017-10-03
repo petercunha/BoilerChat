@@ -77,12 +77,18 @@ app.get('/api/:type/:number', (req, res, err) => {
 				}
 			},
 			{
+				$unwind: "$Courses.Classes.Sections.Meetings"
+			},
+			{
+				$unwind: "$Courses.Classes.Sections.Meetings.Instructors"
+			},
+			{
 				$project: {
 					'_id': 0,
-					'Abbreviation': 1,
-					'Courses.Title': 1,
-					'Courses.Number': 1,
-					'Courses.Classes.Sections.Meetings.Instructors.Name': 1
+					'Subject': '$Abbreviation',
+					'Number': '$Courses.Number',
+					'Title': '$Courses.Title',
+					'Instructor': '$Courses.Classes.Sections.Meetings.Instructors.Name'
 				}
 			}
 		]

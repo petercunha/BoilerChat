@@ -46,18 +46,12 @@ $(document).ready(function() {
                 var json = data[i]
 
                 // Validate the JSON object. Sometimes we have issues with corrupted data.
-                {
-                  if (!json.Abbreviation || !json.Courses) continue
-                  let temp = json.Courses.Classes.Sections
-                  if (temp.Meetings.length == 0) continue
-                  if (temp.Meetings[0].Instructors.length == 0) continue
-                  if (!temp.Meetings[0].Instructors[0].Name) continue
-                }
+                if (!json.Subject || !json.Number || !json.Title || !json.Instructor) continue
 
                 // Grab relevant data from API response
-                let classID = json.Abbreviation + " " + json.Courses.Number
-                let className = json.Courses.Title
-                let classInstructor = json.Courses.Classes.Sections.Meetings[0].Instructors[0].Name
+                let classID = json.Subject + " " + json.Number
+                let className = json.Title
+                let classInstructor = json.Instructor
 
                 // Base64 encode relevant data
                 let url = btoa(classID + ':' + className + ':' + classInstructor)
