@@ -47,11 +47,11 @@ $(document).ready(function() {
 
                 // Validate the JSON object. Sometimes we have issues with corrupted data.
                 {
+                  if (!json.Abbreviation || !json.Courses) continue
                   let temp = json.Courses.Classes.Sections
                   if (temp.Meetings.length == 0) continue
                   if (temp.Meetings[0].Instructors.length == 0) continue
                   if (!temp.Meetings[0].Instructors[0].Name) continue
-                  if (!json.Abbreviation || !json.Courses) continue
                 }
 
                 // Grab relevant data from API response
