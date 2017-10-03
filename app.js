@@ -30,6 +30,18 @@ app.get('/api/:type/:number', (req, res, err) => {
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err
 
+		// Ensure that the query is alphanumeric
+		if (!validator.isAlphanumeric(req.params.type) || !validator.isAlphanumeric(req.params.number)) {
+			res.json([])
+			return false
+		}
+
+		// Set max query length
+		if (req.params.type.length > 15 || req.params.number.length > 15) {
+			res.json([])
+			return false
+		}
+
 		var course_reg = new RegExp('^' + req.params.type)
 		var number_reg = new RegExp('^' + req.params.number)
 
@@ -109,9 +121,16 @@ io.sockets.on('connection', function(socket) {
 		// Sanitize input
 		data = validator.escape(data)
 
+		if (validator.unescape(data).includes('/meme ')) {
+			io.sockets.in(socket.room).emit('updatechat', 'SERVER-MEME', validator.unescape(data).split('/meme ')[1])
+			return
+		} else {
+			console.log(data);
+		}
+
 		// we tell the client to execute 'updatechat' with 2 parameters
-		io.sockets.in(socket.room).emit('updatechat', socket.username, data);
-	});
+		io.sockets.in(socket.room).emit('updatechat', socket.username, data)
+	})
 
 	socket.on('switchRoom', function(newroom) {
 
