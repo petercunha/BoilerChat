@@ -434,13 +434,13 @@ header .profile-container p {
   color: #505050;
   line-height: 21px;
   max-width: 376px;
-  display: inline-block
+  word-wrap: break-word;
+  display: inline-block;
 }
 
 #app .chat ul li label {
-  margin-left: 5px;
+  margin: 5px;
   margin-top: 10px;
-  margin-bottom: 5px;
   font-size: 12px;
   color: #C0C0C0;
   max-width: 376px;
