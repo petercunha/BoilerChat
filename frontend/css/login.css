@@ -47,6 +47,13 @@ body {
 	}
 }
 
+	
+.btn {
+	appearance:button !important;
+	-moz-appearance:button !important; /* Firefox */
+	-webkit-appearance:none !important; /* Safari and Chrome */
+}
+
 .logo {
   margin-top: 9%;
   transition: color 1s ease;
