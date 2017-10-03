@@ -1,17 +1,17 @@
 /* CSS SET UP */
 
+html {
+  background: #43C6AC;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(25deg, #191654, #43C6AC);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(25deg, #191654, #43C6AC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  height: 100%;
+  background-size: cover;
+}
+
 body {
-  width: 100wh;
-  height: 90vh;
-  color: #fff;
-  background: linear-gradient(-65deg, #67b26f, #4ca2cd);
-  /*background: linear-gradient(-65deg, #ffd89b, #19547b);*/
-  /*background: linear-gradient(-45deg, #ec6ead, #3494e6);*/
-  /*background: linear-gradient(-65deg, #f3904f, #3b4371);*/
-  background-size: 150% 150%;
-  -webkit-animation: Gradient 15s ease infinite;
-  -moz-animation: Gradient 15s ease infinite;
-  animation: Gradient 15s ease infinite;
+  background: none;
+  background-color: none;
 }
 
 @-webkit-keyframes Gradient {
@@ -60,7 +60,7 @@ body {
 
 .logo {
   margin-top: 9%;
-  color: linear-gradient(-45deg, #f3904f, #3b4371);
+  color: #FFFCFC;
 }
 
 table {
