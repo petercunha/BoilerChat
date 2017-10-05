@@ -1,10 +1,8 @@
 # BoilerChat 
-[![forthebadge](http://forthebadge.com/images/badges/gluten-free.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/made-with-crayons.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/images/badges/made-with-crayons.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/gluten-free.svg)](http://forthebadge.com) 
 
 
-A live, anonymous, online chatroom for Purdue students.
-
-BoilerChat was concieved at Purdue's annual hackathon, and we've been working on it ever since. [Click here to visit our site.](https://www.boilerchat.com)
+**BoilerChat is a live, anonymous, online chatroom for Purdue students.** It was concieved at Purdue's annual hackathon, and we've been working on it ever since. [Click here to visit our site.](https://www.boilerchat.com)
 
 
 ## Pictures
