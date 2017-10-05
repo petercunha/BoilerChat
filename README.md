@@ -10,7 +10,7 @@ It was concieved at Purdue's annual hackathon, and we've been working on it ever
 [Click here to visit our site.](https://www.boilerchat.com)
 
 
-####
+---
 
 ![Homepage](https://i.imgur.com/w3e4vQc.png)
 ![Search Example](https://i.imgur.com/L71zYsj.png)
