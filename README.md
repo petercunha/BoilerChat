@@ -11,7 +11,7 @@
 
 ![Homepage](https://i.imgur.com/w3e4vQc.png)
 ![Search Example](https://i.imgur.com/L71zYsj.png)
-![Chat Example](https://i.imgur.com/MiiEoej.png)
+![Chat Example](https://i.imgur.com/qY9Avfl.png)
 
 
 ## Contributing
