@@ -1,2 +1,3 @@
-# BoilerMegle
-Boilermake 2017 project repo
+# BoilerChat
+
+An online chatroom for Purdue students.

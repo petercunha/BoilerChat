@@ -1,7 +1,7 @@
 {
-     "name": "mukhin_chat",
-     "description": "example chat application with socket.io",
-     "version": "0.0.1",
+     "name": "boilerchat",
+     "description": "An online chatroom website for Purdue students",
+     "version": "1.0.0",
      "scripts": {
           "start": "nodemon app.js"
      },
