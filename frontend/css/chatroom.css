@@ -474,6 +474,10 @@ header .profile-container p {
   margin-right: auto;
 }
 
+.greenMsg {
+  color: rgba(0, 158, 42, 0.722) !important;
+}
+
 #online {
   overflow: hidden;
   margin-left: auto;

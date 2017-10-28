@@ -20,13 +20,19 @@ function start () {
   socket.on('connect', function () {
     user = nameGenerator()
     socket.emit('adduser', user, resultEncoded)
-    $('#nametag').text(result.split(':')[0] + ' · ' + result.split(':')[2])
+    $('#nametag').text(result.split(':')[0] + ' · ' + result.split(':')[2] + ' · ')
   })
 
   socket.on('updateusers', function (username, data) {
 		// Handle messages from the chatserver
     if (username === 'SERVER-MSG') {
-      $('#online').text(" · " + data + " Online")
+      if (parseInt(data) > 1) {
+        $('#online').text(data + ' Online')
+        $('#online').addClass('greenMsg')
+      } else {
+        $('#online').text('1 Online')
+        $('#online').removeClass('greenMsg')
+      }
     }
   })
 
@@ -57,7 +63,7 @@ function start () {
 		// Append message to conversation
     if (user === username) {
       $('#conversation').append(`
-	        <li class="user">
+	        <li class='user'>
 							${label}
 	            <p>${data}</p>
 	        </li>
