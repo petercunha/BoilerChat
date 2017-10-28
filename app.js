@@ -122,6 +122,16 @@ io.sockets.on('connection', function (socket) {
     usernames[username] = username
 		// send client to room 1
     socket.join(room)
+
+    // Send the number of online users in a room
+    var onlineUsers = io.sockets.adapter.rooms[room];
+    if (onlineUsers != null && onlineUsers && onlineUsers.length) {
+      // Emit to room
+      socket.broadcast.to(room).emit('updateusers', 'SERVER-MSG', onlineUsers.length)
+      // Emit to user
+      socket.emit('updateusers', 'SERVER-MSG', onlineUsers.length)
+    }
+
 		// echo to client they've connected
     socket.emit('updatechat', 'SERVER-MSG', 'You have connected to ' + atob(room).split(':')[0])
 		// echo to room 1 that a person has connected to their room
@@ -163,6 +173,13 @@ io.sockets.on('connection', function (socket) {
     delete usernames[socket.username]
 		// update list of users in chat, client-side
     io.sockets.emit('updateusers', usernames)
+
+    // Send the number of online users in a room
+    var onlineUsers = io.sockets.adapter.rooms[socket.room];
+    if (onlineUsers != null && onlineUsers && onlineUsers.length) {
+      socket.broadcast.to(socket.room).emit('updateusers', 'SERVER-MSG', onlineUsers.length)
+    }
+
 		// echo globally that this client has left
     socket.broadcast.to(socket.room).emit('updatechat', 'SERVER-MSG', socket.username + ' has disconnected')
     socket.leave(socket.room)

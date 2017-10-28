@@ -474,6 +474,12 @@ header .profile-container p {
   margin-right: auto;
 }
 
+#online {
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #app .chat ul li.user {
   text-align: right
 }

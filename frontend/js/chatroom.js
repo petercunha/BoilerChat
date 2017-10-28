@@ -23,6 +23,14 @@ function start () {
     $('#nametag').text(result.split(':')[0] + ' · ' + result.split(':')[2])
   })
 
+  socket.on('updateusers', function (username, data) {
+		// Handle messages from the chatserver
+    if (username === 'SERVER-MSG') {
+      $('#online').text(" · " + data + " Online")
+    }
+  })
+
+
 	// Listener, whenever the server emits 'updatechat', this updates the chat body
   socket.on('updatechat', function (username, data) {
 		// Handle messages from the chatserver
