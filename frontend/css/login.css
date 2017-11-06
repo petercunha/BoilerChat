@@ -137,3 +137,48 @@ table {
 .container-4 input#search:focus, .container-4 input#search:active {
   outline: none;
 }
+
+.table td, .table th {
+    border-top: 0px solid #e9ecef;
+    border-radius: 5px;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+     margin-right: 0px;
+    margin-left: -15px;
+}
+
+.glyphicon {
+    font-size: 50px;
+    /*color: pink;*/
+    margin-top: 1em;
+}
+
+#help, #email {
+  font-size: 2em;
+  color: white;
+  font-family: Helvetica;
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+}
+
+.text-muted {
+    color: #868e96;
+    display: table;
+    margin: 0 auto;
+    width: inherit;
+}
+a {
+  margin-left: 2em;
+  font-size: 1.2em;
+  color: #a9a9a9;
+}
