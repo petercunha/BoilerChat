@@ -23,6 +23,6 @@ Nice! Everything should now be properly set up. Now we just need to start the se
 
 - Run `npm start`. If it doesn't work, make sure that:
   - `nodemon` is installed globally (run `npm i -g nodemon` if it isn't)
-  - You're running it as `sudo` if you get a permission error. Sometimes listening on port 80 is restricted to root permissions only.
+  - Run it as `sudo` if you get a permission error. Sometimes listening on port 80 is restricted to root permissions only.
 
 Now you can navigate to `http://localhost:80` in your browser, and BoilerChat should be running!
