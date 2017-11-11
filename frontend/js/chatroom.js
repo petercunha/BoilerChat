@@ -23,6 +23,7 @@ function start() {
 		$('#nametag').text(result.split(':')[0] + ' · ' + result.split(':')[2] + ' · ')
 	})
 
+	// Handle disconnect
 	socket.on('disconnect', function() {
 		iziToast.warning({
 			title: 'Error',
@@ -44,7 +45,6 @@ function start() {
 			}
 		}
 	})
-
 
 	// Listener, whenever the server emits 'updatechat', this updates the chat body
 	socket.on('updatechat', function(username, data) {
@@ -88,6 +88,34 @@ function start() {
 
 		var chatbox = document.getElementById('conversation')
 		chatbox.scrollTop = chatbox.scrollHeight
+	})
+
+	// Grab the chat history for the room and populate the page with messages
+	$.get('/history/' + resultEncoded, function(data, status) {
+			var history = data
+			var lastMessageUsername = null
+
+			// Load each message into chat
+			for (var i = history.length - 1; i >= 0; i--) {
+				var _user = history[i].user
+				var _msg = history[i].message
+
+				var label = ''
+				if (lastMessageUsername !== _user) {
+					label = `<label>${_user}</label></br>`
+				}
+				lastMessageUsername = _user
+
+				$('#conversation').append(`
+		        <li>
+		            ${label}
+		            <p>${_msg}</p>
+		        </li>
+	      `)
+			}
+
+			// Now scroll to bottom of chat
+			$('#conversation').scrollTop(99999);
 	})
 
 	// On load of page

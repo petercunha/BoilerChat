@@ -30,6 +30,13 @@ app.get('/chat/:id', (req, res, err) => {
 	res.sendFile(path.join(__dirname, 'frontend', 'index.html'))
 })
 
+app.get('/history/:room', (req, res, err) => {
+	var room = atob(validator.escape(req.params.room))
+	roomHistory(room, 50, (data) => {
+		res.json(data)
+	})
+})
+
 app.get('/api/:type/:number', (req, res, err) => {
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err
@@ -141,28 +148,36 @@ io.sockets.on('connection', function(socket) {
 		socket.broadcast.to(room).emit('updatechat', 'SERVER-MSG', username + ' has connected to this room')
 	})
 
-	// when the client emits 'sendchat', this listens and executes
+	// When the client emits 'sendchat', this listens and executes
 	socket.on('sendchat', function(data) {
+
 		// Sanitize input
 		data = validator.escape(data)
-    room = atob(socket.room).split(':')
+		username = validator.escape(socket.username)
+		room = atob(socket.room).split(':')
 
-    var msg = {
-      message: data,
-      ip: socket.request.connection.remoteAddress,
-      class: room[0],
-      teacher: room[2]
-    }
-
-    console.log('Message recieved: ' + JSON.stringify(msg));
-
-		if (validator.unescape(data).includes('/meme ')) {
-			io.sockets.in(socket.room).emit('updatechat', 'SERVER-MEME', validator.unescape(data).split('/meme ')[1])
-			return
+		var msg = {
+			user: username,
+			message: data,
+			timestamp: Date.UTC(),
+			ip: socket.request.connection.remoteAddress,
+			class: room[0],
+			teacher: room[2]
 		}
 
+		// Log to console
+		console.log('Message recieved: ' + JSON.stringify(msg))
+
+		// Store the message in the database
+		storeMessageInDB({
+			room: atob(validator.escape(socket.room)),
+			timestamp: new Date(),
+			user: username,
+			message: data
+		})
+
 		// we tell the client to execute 'updatechat' with 2 parameters
-		io.sockets.in(socket.room).emit('updatechat', socket.username, data)
+		io.sockets.in(socket.room).emit('updatechat', username, data)
 	})
 
 	socket.on('switchRoom', function(newroom) {
@@ -198,6 +213,38 @@ io.sockets.on('connection', function(socket) {
 		socket.leave(socket.room)
 	})
 })
+
+// Stores message in MongoDB
+function storeMessageInDB(obj) {
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err
+		db.collection('messages').insertOne(obj, function(err, res) {
+			if (err) throw err
+			db.close()
+		})
+	})
+}
+
+// Gets most recent message history from a chatroom
+function roomHistory(room, lim, callback) {
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err
+		db.collection('messages')
+		.find({ 'room' : room })
+		.sort({ 'timestamp' : -1})
+		.project({
+			_id: 0,
+			'user' : 1,
+			'message' : 1
+		})
+		.limit(lim)
+		.toArray(function(err, res) {
+			if (err) throw err
+			callback(res)
+			db.close()
+		})
+	})
+}
 
 function atob(str) {
 	return Buffer.from(str, 'base64').toString('ascii')
