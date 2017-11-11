@@ -32,7 +32,7 @@ app.get('/chat/:id', (req, res, err) => {
 
 app.get('/history/:room', (req, res, err) => {
 	var room = atob(validator.escape(req.params.room))
-	roomHistory(room, 50, (data) => {
+	roomHistory(room, 100, (data) => {
 		res.json(data)
 	})
 })
