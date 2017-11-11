@@ -20,7 +20,7 @@ server.listen(PORT)
 console.log('Server started on localhost:' + PORT)
 
 // Log all requests
-app.use(morgan('short'))
+app.use(morgan('combined'))
 
 app.get('/', (req, res, err) => {
 	res.sendFile(path.join(__dirname, 'frontend', 'login.html'))
