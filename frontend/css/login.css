@@ -139,9 +139,8 @@ table {
 }
 
 #help, #email {
-  font-size: 1.25em;
-  color: white;
-  font-family: Helvetica;
+  font-size: 1.1em;
+  color: #e8e8e8;
   margin-top: 12px;
 }
 
@@ -164,8 +163,9 @@ table {
     margin: 0 auto;
     width: inherit;
 }
+
 a {
-  margin-left: 2em;
-  font-size: 1.2em;
-  color: #a9a9a9;
+  margin: 8px;
+  font-size: 0.85em;
+  color: #969696;
 }
