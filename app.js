@@ -159,7 +159,7 @@ io.sockets.on('connection', function(socket) {
 		var msg = {
 			user: username,
 			message: data,
-			timestamp: Date.UTC(),
+			timestamp: new Date(),
 			ip: socket.request.connection.remoteAddress,
 			class: room[0],
 			teacher: room[2]
