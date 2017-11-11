@@ -5,7 +5,7 @@
 
 
 **BoilerChat is a live, anonymous, online chatroom for Purdue students.** 
-It was concieved at Purdue's annual hackathon, and we've been working on it ever since. 
+It was first created at Purdue's annual hackathon, and we've been working on it ever since. 
 
 [Click here to visit our site.](https://www.boilerchat.com)
 
