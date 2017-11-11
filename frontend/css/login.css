@@ -6,12 +6,14 @@ html {
   background: linear-gradient(25deg, #191654, #43C6AC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   height: 100%;
+  position: relative;
   background-size: cover;
 }
 
 body {
   background: none;
   background-color: none;
+  margin-bottom: 60px;
 }
 
 @-webkit-keyframes Gradient {
@@ -149,22 +151,17 @@ table {
 }
 
 .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
-    font-size: 0.75em;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  z-index: -8;
 }
 
-.text-muted {
-    color: #868e96;
-    display: table;
-    margin: 0 auto;
-    width: inherit;
-}
-
-a {
+.bottom {
+  font-size: 0.85em;
   margin: 8px;
   color: #969696;
 }
