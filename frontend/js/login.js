@@ -61,12 +61,12 @@ $(document).ready(function () {
                 // Track the object hash to prevent duplicates
         map[url] = 1
 
-                // Add table data to buffer
-        courseData += '<tr>'
-        courseData += '<td>' + classID + '</td>'
-        courseData += '<td>' + className + '</td>'
-        courseData += '<td>' + classInstructor + '</td>'
-        courseData += '<td><a href="/chat/' + url + '" type="button" class="btn btn-primary btn-sm">Join Chat</></td>'
+        // Add table data to buffer
+        courseData += '<tr class = "row">'
+        courseData += '<td class = "col-xs-12 col-md-3">' + classID + '</td>'
+        courseData += '<td class = "col-xs-12 col-md-3">' + className + '</td>'
+        courseData += '<td class = "col-xs-12 col-md-3">' + classInstructor + '</td>'
+        courseData += '<td class = "col-xs-12 col-md-3"><a href="/chat/' + url + '" type="button" class="btn btn-primary btn-sm">Join Chat</></td>'
         courseData += '</tr>'
       }
 

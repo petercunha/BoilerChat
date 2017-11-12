@@ -2,8 +2,10 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
     <title>BoilerChat</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
@@ -37,27 +39,21 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="table text-center">
-                    <table id="tablediv" class="table table-inverse text-center" style="display: none; background-color: #2b303b">
-                        <thead class="text-center">
-                            <tr class="text-center">
-                                <th class="text-center">Course Subject</th>
-                                <th class="text-center">Course Name</th>
-                                <th class="text-center">Instructors</th>
-                                <th class="text-center">Join Chat</th>
-                            </tr>
-                        </thead>
-                        <tbody id="course_list">
-                            <tr>
-                                <td>Type in a course ID to join a chat.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <div>
+          <div>
+            <div class="table-responsive">
+              <table id="tablediv" class="table table-inverse text-center" style="display: none; background-color: #2b303b" border="0">
+                <tbody id="course_list">
+                  <tr>
+                    <td>Type in a course ID to join a chat.</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
+
+
         <div class="container">
             <div id="about" class="collapse">
                 BoilerChat is a live, anonymous, online chatroom for Purdue students. The BoilerChat website is written and maintained by two Computer Science students at Purdue.
