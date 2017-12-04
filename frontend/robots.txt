@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /admin/
 
 #   _________________________________________
 #   / Staff meeting in the conference room in \
