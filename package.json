@@ -1,17 +1,21 @@
 {
-     "name": "boilerchat",
-     "description": "An online chatroom website for Purdue students",
-     "version": "1.0.0",
-     "scripts": {
-          "start": "nodemon server.js"
-     },
-     "dependencies": {
-          "express": "",
-          "mongodb": "^2.2.31",
-          "morgan": "^1.9.0",
-          "nodemon": "^1.12.1",
-          "path": "^0.12.7",
-          "socket.io": "",
-          "validator": "^9.0.0"
-     }
+  "name": "boilerchat",
+  "description": "An online chatroom website for Purdue students",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "nodemon server.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "dependencies": {
+    "express": "",
+    "mongodb": "^2.2.31",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.12.1",
+    "path": "^0.12.7",
+    "socket.io": "",
+    "validator": "^9.0.0",
+    "snyk": "^1.53.0"
+  },
+  "snyk": true
 }
