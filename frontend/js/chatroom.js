@@ -16,6 +16,9 @@ function start() {
 	$('#lecturename').text(result.split(':')[0])
 	$('#lectureprofessor').text(result.split(':')[2])
 
+	// Grab the chat history for the room and populate the page with messages
+	loadChatHistory()
+
 	// Handle connection to socket server
 	socket.on('connect', function() {
 		user = nameGenerator()
@@ -90,34 +93,6 @@ function start() {
 		chatbox.scrollTop = chatbox.scrollHeight
 	})
 
-	// Grab the chat history for the room and populate the page with messages
-	$.get('/history/' + resultEncoded, function(data, status) {
-			var history = data
-			var lastMessageUsername = null
-
-			// Load each message into chat
-			for (var i = history.length - 1; i >= 0; i--) {
-				var _user = history[i].user
-				var _msg = history[i].message
-
-				var label = ''
-				if (lastMessageUsername !== _user) {
-					label = `<label>${_user}</label></br>`
-				}
-				lastMessageUsername = _user
-
-				$('#conversation').append(`
-		        <li>
-		            ${label}
-		            <p>${_msg}</p>
-		        </li>
-	      `)
-			}
-
-			// Now scroll to bottom of chat
-			$('#conversation').scrollTop(99999);
-	})
-
 	// On load of page
 	$(function() {
 		// When the client clicks SEND
@@ -156,6 +131,36 @@ function start() {
 	$('input, select, textarea').on('focus blur', function(event) {
 		$('meta[name=viewport]').attr('content', 'width=device-width,initial-scale=1,maximum-scale=' + (event.type === 'blur' ? 10 : 1))
 	})
+
+	// Grab the chat history for the room and populate the page with messages
+	function loadChatHistory() {
+		$.get('/history/' + resultEncoded, function(data, status) {
+				var history = data
+				var lastMessageUsername = null
+
+				// Load each message into chat
+				for (var i = history.length - 1; i >= 0; i--) {
+					var _user = history[i].user
+					var _msg = history[i].message
+
+					var label = ''
+					if (lastMessageUsername !== _user) {
+						label = `<label>${_user}</label></br>`
+					}
+					lastMessageUsername = _user
+
+					$('#conversation').append(`
+			        <li>
+			            ${label}
+			            <p>${_msg}</p>
+			        </li>
+		      `)
+				}
+				
+				// Now scroll to bottom of chat
+				$('#conversation').scrollTop(99999);
+		})
+	}
 
 	function nameGenerator() {
 		var animals = ['Alligator', 'Purdue Pete', 'Anteater', 'Armadillo', 'Badger', 'Bat', 'Beaver', 'Buffalo', 'Camel', 'Chameleon', 'Cheetah', 'Chipmunk', 'Chinchilla', 'Chupacabra', 'Dingus', 'Coyote', 'Crow', 'Dingo', 'Dinosaur', 'Dolphin', 'Duck', 'Elephant', 'Ferret', 'Fox', 'Frog', 'Giraffe', 'Gopher', 'Grizzly', 'Hedgehog', 'Hippo', 'Hyena', 'Jackal', 'Ibex', 'Iguana', 'Koala', 'Kraken', 'Lemur', 'Leopard', 'Liger', 'Llama', 'Manatee', 'Mink', 'Monkey', 'Narwhal', 'Orangutan', 'Otter', 'Panda', 'Penguin', 'Platypus', 'Python', 'Pumpkin', 'Sea Cucumber', 'Rabbit', 'Raccoon', 'Rhino', 'Sheep', 'Shrew', 'Skunk', 'Squirrel', 'Turtle', 'Walrus', 'Wolf', 'Wolverine', 'Wombat', 'Tuna']
