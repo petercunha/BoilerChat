@@ -22,14 +22,27 @@ console.log('Server started on localhost:' + PORT)
 // Log all requests
 app.use(morgan('combined'))
 
+
+/*
+		ROUTES
+*/
+
+// Index
 app.get('/', (req, res, err) => {
 	res.sendFile(path.join(__dirname, 'frontend', 'login.html'))
 })
 
+// Chatrooms
 app.get('/chat/:id', (req, res, err) => {
 	res.sendFile(path.join(__dirname, 'frontend', 'index.html'))
 })
 
+// For hackers
+app.get('/admin', (req, res, err) => {
+	res.redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+})
+
+// Chat history (API)
 app.get('/history/:room', (req, res, err) => {
 	var room = atob(validator.escape(req.params.room))
 	roomHistory(room, 100, (data) => {
@@ -37,6 +50,7 @@ app.get('/history/:room', (req, res, err) => {
 	})
 })
 
+// Course lookup (API)
 app.get('/api/:type/:number', (req, res, err) => {
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err
@@ -230,19 +244,23 @@ function roomHistory(room, lim, callback) {
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err
 		db.collection('messages')
-		.find({ 'room' : room })
-		.sort({ 'timestamp' : -1})
-		.project({
-			_id: 0,
-			'user' : 1,
-			'message' : 1
-		})
-		.limit(lim)
-		.toArray(function(err, res) {
-			if (err) throw err
-			callback(res)
-			db.close()
-		})
+			.find({
+				'room': room
+			})
+			.sort({
+				'timestamp': -1
+			})
+			.project({
+				_id: 0,
+				'user': 1,
+				'message': 1
+			})
+			.limit(lim)
+			.toArray(function(err, res) {
+				if (err) throw err
+				callback(res)
+				db.close()
+			})
 	})
 }
 
