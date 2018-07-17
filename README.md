@@ -1,5 +1,6 @@
 # BoilerChat 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-crayons.svg)](https://forthebadge.com) 
+[![forthebadge](https://forthebadge.com/images/badges/made-with-crayons.svg)](https://forthebadge.com) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpetercunha%2FBoilerChat.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpetercunha%2FBoilerChat?ref=badge_shield)
+
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) 
 [![forthebadge](https://forthebadge.com/images/badges/gluten-free.svg)](https://forthebadge.com) 
 
@@ -25,3 +26,7 @@ If you're interested in helping develop BoilerChat, please clone the repo and re
 - Thank you to [Hayden McAfee](https://github.com/haydenmc) for supplying the [Purdue Course API](https://github.com/Purdue-io/PurdueApi). This API is what allows us to index every lecture at Purdue.
 
 - Thank you for the organizers of [Boilermake](https://boilermake.org) for providing an fun, welcoming venue for Purdue hackers to make whatever they want. You guys are awesome.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpetercunha%2FBoilerChat.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpetercunha%2FBoilerChat?ref=badge_large)
