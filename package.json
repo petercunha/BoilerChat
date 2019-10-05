@@ -15,7 +15,7 @@
     "path": "^0.12.7",
     "socket.io": "",
     "validator": "^9.1.2",
-    "snyk": "^1.53.0"
+    "snyk": "^1.231.0"
   },
   "snyk": true
 }
